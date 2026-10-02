@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Techno Software | Premium Tools & Firmware</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#030712;--b:#0ea5e9;--v:#a855f7;--line:rgba(255,255,255,.08);--ease:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:#e2e8f0;font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:#1e293b;border-radius:9px}
+.no-sb::-webkit-scrollbar{display:none}.no-sb{scrollbar-width:none}
+/* aurora background */
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.aurora i{position:absolute;border-radius:50%;filter:blur(110px);opacity:.28;animation:drift 22s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:520px;height:520px;background:#0ea5e9;top:-120px;left:-100px}
+.aurora i:nth-child(2){width:460px;height:460px;background:#a855f7;top:30%;right:-120px;animation-delay:-8s}
+.aurora i:nth-child(3){width:400px;height:400px;background:#06b6d4;bottom:-140px;left:30%;animation-delay:-14s}
+@keyframes drift{to{transform:translate(90px,60px) scale(1.2)}}
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none}
+#glow{position:fixed;width:420px;height:420px;border-radius:50%;pointer-events:none;z-index:1;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(14,165,233,.13),transparent 65%);transition:opacity .3s}
+/* glass */
+.glass{background:linear-gradient(145deg,rgba(15,23,42,.78),rgba(3,7,18,.9));backdrop-filter:blur(18px) saturate(160%);border:1px solid var(--line);border-radius:20px}
+.nav{background:rgba(3,7,18,.7);backdrop-filter:blur(22px) saturate(180%);border-bottom:1px solid var(--line)}
+/* gradient border card */
+.card{position:relative;border-radius:22px;background:linear-gradient(150deg,rgba(15,23,42,.9),rgba(3,7,18,.97));cursor:pointer;transition:transform .5s var(--ease),box-shadow .5s var(--ease);transform-style:preserve-3d;will-change:transform}
+.card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(14,165,233,.0) 40%,rgba(168,85,247,.0) 60%,rgba(255,255,255,.06));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;transition:background .5s;pointer-events:none}
+.card:hover{box-shadow:0 35px 70px -20px rgba(14,165,233,.35)}
+.card:hover::before{background:linear-gradient(135deg,#0ea5e9,transparent 45%,#a855f7)}
+.card .shine{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.08),transparent 45%)}
+.card:hover .shine{opacity:1}
+.card img{transition:transform 1s var(--ease)}.card:hover img{transform:scale(1.1)}
+/* buttons */
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:13px;padding:13px 22px;border-radius:14px;color:#fff;border:0;cursor:pointer;text-decoration:none;transition:transform .35s var(--ease),box-shadow .35s}
+.btn-p{background:linear-gradient(135deg,#0ea5e9,#6366f1 60%,#a855f7);background-size:200% 200%;animation:grad 6s ease infinite;box-shadow:0 8px 30px rgba(14,165,233,.4)}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(99,102,241,.55)}
+.btn-p::after{content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);transition:left .8s var(--ease)}
+.btn-p:hover::after{left:140%}
+.btn-g{background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.btn-g:hover{background:rgba(255,255,255,.1);border-color:rgba(14,165,233,.4);transform:translateY(-3px)}
+.btn-tg{background:linear-gradient(135deg,#229ed9,#0284c7);box-shadow:0 8px 26px rgba(34,158,217,.4)}
+.btn-tg:hover{transform:translateY(-3px)}
+.btn-em{background:linear-gradient(135deg,#f43f5e,#a855f7);box-shadow:0 8px 26px rgba(244,63,94,.35)}
+.btn-em:hover{transform:translateY(-3px)}
+@keyframes grad{50%{background-position:100% 50%}}
+.gtext{background:linear-gradient(120deg,#38bdf8,#818cf8,#c084fc,#38bdf8);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:grad 7s linear infinite}
+/* inputs */
+.in{width:100%;background:rgba(2,6,23,.85);border:1px solid var(--line);border-radius:12px;padding:12px 15px;color:#fff;font-size:13px;font-family:inherit;outline:none;transition:.25s}
+.in:focus{border-color:rgba(14,165,233,.6);box-shadow:0 0 0 4px rgba(14,165,233,.12)}
+.in::placeholder{color:#475569}textarea.in{min-height:110px;resize:vertical}
+label.l{display:block;font-size:11px;font-weight:700;color:#64748b;margin-bottom:7px;letter-spacing:.04em;text-transform:uppercase}
+/* pills & badges */
+.pill{padding:8px 18px;border-radius:99px;border:1px solid var(--line);font-size:12px;font-weight:700;color:#94a3b8;background:rgba(15,23,42,.7);cursor:pointer;white-space:nowrap;transition:.35s var(--ease)}
+.pill:hover{color:#fff;border-color:rgba(14,165,233,.5);transform:translateY(-2px)}
+.pill.on{background:linear-gradient(135deg,#0ea5e9,#6366f1);color:#fff;border-color:transparent;box-shadow:0 6px 20px rgba(14,165,233,.4)}
+.bdg{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:99px;font-size:11px;font-weight:700}
+.bdg-b{background:rgba(14,165,233,.12);color:#38bdf8;border:1px solid rgba(14,165,233,.25)}
+.bdg-g{background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
+.bdg-r{background:rgba(239,68,68,.14);color:#f87171;border:1px solid rgba(239,68,68,.3)}
+/* modal */
+.mb{position:fixed;inset:0;z-index:1000;background:rgba(2,6,23,.85);backdrop-filter:blur(16px);display:none;align-items:center;justify-content:center;padding:14px}
+.mb.open{display:flex;animation:fade .3s}
+.mb>div{animation:pop .5s var(--ease)}
+@keyframes fade{from{opacity:0}}@keyframes pop{from{opacity:0;transform:translateY(40px) scale(.96)}}
+/* reveal */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.in-v{opacity:1;transform:none}
+/* skeleton */
+.sk{background:linear-gradient(90deg,rgba(30,41,59,.4) 25%,rgba(51,65,85,.5) 50%,rgba(30,41,59,.4) 75%);background-size:200% 100%;animation:sh 1.4s infinite;border-radius:22px;height:340px}
+@keyframes sh{to{background-position:-200% 0}}
+/* floating support (bottom-left corner) */
+#support{position:fixed;left:18px;bottom:18px;z-index:60}
+.sup-btn{display:flex;align-items:center;gap:10px;padding:10px 16px 10px 10px;border-radius:99px;background:rgba(3,7,18,.85);backdrop-filter:blur(18px);border:1px solid rgba(14,165,233,.3);color:#e2e8f0;font-size:12px;font-weight:700;text-decoration:none;transition:.4s var(--ease);animation:float 4.5s ease-in-out infinite}
+.sup-btn:hover{border-color:#0ea5e9;box-shadow:0 10px 36px rgba(14,165,233,.4);transform:translateY(-4px)}
+.sup-ico{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#0ea5e9,#a855f7);display:flex;align-items:center;justify-content:center;position:relative}
+.sup-ico::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid #0ea5e9;animation:ring 2.2s infinite}
+@keyframes ring{from{transform:scale(.85);opacity:.9}to{transform:scale(1.5);opacity:0}}
+@keyframes float{50%{transform:translateY(-6px)}}
+#toasts{position:fixed;top:84px;right:18px;z-index:9999;display:flex;flex-direction:column;gap:10px}
+.toast{animation:pop .45s var(--ease)}
+.tab{padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;background:rgba(15,23,42,.8);border:1px solid var(--line);color:#64748b;cursor:pointer;white-space:nowrap;transition:.3s}
+.tab.on{background:linear-gradient(135deg,#0ea5e9,#6366f1);color:#fff;border-color:transparent}
+table{width:100%;border-collapse:collapse;font-size:13px}th{padding:14px;text-align:left;font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.08em}td{padding:14px;border-top:1px solid rgba(255,255,255,.05)}
+.lc{-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body class="antialiased selection:bg-sky-500/30">
+<div class="aurora"><i></i><i></i><i></i></div>
+<canvas id="cv"></canvas>
+<div id="glow"></div>
+<div id="toasts"></div>
+
+<!-- NAV -->
+<nav class="nav fixed top-0 w-full z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-[68px] flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3 cursor-pointer group" onclick="go('store')">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-violet-600 flex items-center justify-center shadow-lg group-hover:rotate-12 transition duration-500"><i class="fa-solid fa-microchip text-white"></i></div>
+      <span class="text-lg font-extrabold tracking-tight text-white">Techno<span class="text-sky-400 font-light">Software</span></span>
+    </div>
+    <div class="hidden md:flex items-center bg-slate-900/70 border border-white/10 rounded-2xl px-4 py-2.5 flex-1 max-w-sm focus-within:border-sky-500/50 focus-within:shadow-[0_0_0_4px_rgba(14,165,233,.12)] transition">
+      <i class="fa-solid fa-magnifying-glass text-slate-500 mr-3 text-sm"></i>
+      <input id="search" oninput="S.q=this.value.toLowerCase().trim();grid()" placeholder="Search products, firmware, tools..." class="bg-transparent text-sm text-white placeholder-slate-500 outline-none w-full">
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="openCustom()" class="btn btn-p !py-2.5 !px-4 !text-xs"><i class="fa-solid fa-wand-magic-sparkles"></i><span class="hidden sm:inline">Custom Order</span></button>
+      <button onclick="adminEntry()" class="btn btn-g !py-2.5 !px-4 !text-xs"><i class="fa-solid fa-shield-halved text-sky-400"></i><span class="hidden sm:inline">Admin</span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- STORE -->
+<main id="v-store" class="pt-[68px] relative z-10">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-10 grid lg:grid-cols-2 gap-10 items-center min-h-[70vh]">
+    <div>
+      <span class="bdg bdg-b mb-6 rv"><span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-ping"></span>Instant digital delivery</span>
+      <h1 id="h-title" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.08] tracking-tight mb-5 rv">Premium tools &amp; <span class="gtext">firmware</span> built to ship.</h1>
+      <p id="h-sub" class="text-slate-400 text-base max-w-lg mb-8 leading-relaxed rv">Production-ready source code, schematics and support from the developer. Pick a ready product or tell us what you want built.</p>
+      <div class="flex flex-wrap gap-3 rv">
+        <a href="#catalog" class="btn btn-p"><i class="fa-solid fa-bag-shopping"></i> Browse Products</a>
+        <button onclick="openCustom()" class="btn btn-g"><i class="fa-solid fa-pen-ruler text-violet-400"></i> Request Custom Build</button>
+      </div>
+    </div>
+    <div id="spot" class="hidden rv"></div>
+  </section>
+
+  <section id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 pt-6">
+    <div class="glass p-4 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-3 rv">
+      <div id="cats" class="flex gap-2 overflow-x-auto no-sb"></div>
+      <select id="sort" onchange="S.sort=this.value;grid()" class="bg-slate-950 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-slate-200 outline-none cursor-pointer">
+        <option value="new">Newest first</option><option value="lh">Price: low to high</option><option value="hl">Price: high to low</option>
+      </select>
+    </div>
+    <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" style="perspective:1200px"></div>
+  </section>
+
+  <!-- Custom order banner -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 mt-24">
+    <div class="glass p-8 sm:p-12 text-center relative overflow-hidden rv">
+      <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-violet-500/20 blur-3xl rounded-full"></div>
+      <h2 class="relative text-2xl sm:text-4xl font-extrabold text-white mb-3">Need something <span class="gtext">made for you?</span></h2>
+      <p class="relative text-slate-400 text-sm max-w-xl mx-auto mb-7">Describe your idea, features and design. We discuss it with you and reply within 24 hours on Telegram or email.</p>
+      <button onclick="openCustom()" class="btn btn-p relative"><i class="fa-solid fa-paper-plane"></i> Start a Custom Order</button>
+    </div>
+  </section>
+
+  <footer class="mt-24 border-t border-white/10 py-12 text-center">
+    <div class="flex items-center justify-center gap-2 mb-3"><div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-sky-500 to-violet-600 flex items-center justify-center"><i class="fa-solid fa-microchip text-white text-xs"></i></div><b class="text-white text-sm">Techno<span class="text-sky-400 font-light">Software</span></b></div>
+    <p class="text-slate-500 text-xs">Designed &amp; built by <span class="font-bold bg-gradient-to-r from-sky-400 to-violet-400 bg-clip-text text-transparent">Nithish Tech Tamizha</span></p>
+    <p class="text-slate-700 text-[11px] mt-1.5 font-mono">© 2026 Techno Software</p>
+  </footer>
+</main>
+
+<!-- Floating support corner -->
+<div id="support" class="hidden">
+  <a id="sup-link" class="sup-btn" href="#"><span class="sup-ico"><i class="fa-solid fa-headset text-white text-sm"></i></span><span><span class="block text-[10px] text-slate-500 font-semibold">Customer service</span><span id="sup-mail" class="block"></span></span></a>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div id="m-prod" class="mb" onclick="if(event.target===this)closeM('m-prod')">
+  <div class="w-full max-w-5xl bg-slate-950/95 rounded-3xl border border-white/10 overflow-y-auto max-h-[92vh] relative shadow-2xl">
+    <button onclick="closeM('m-prod')" class="absolute top-4 right-4 z-20 w-10 h-10 bg-slate-900 border border-white/10 rounded-full text-slate-400 hover:text-white hover:rotate-90 transition duration-500"><i class="fa-solid fa-xmark"></i></button>
+    <div class="grid lg:grid-cols-11">
+      <div class="lg:col-span-5 p-6 sm:p-8 lg:border-r border-white/10 flex flex-col gap-4">
+        <div id="pm-main" class="w-full h-72 bg-slate-900 rounded-2xl overflow-hidden border border-white/10 flex items-center justify-center"></div>
+        <div id="pm-th" class="flex gap-2.5 overflow-x-auto no-sb"></div>
+      </div>
+      <div class="lg:col-span-6 p-6 sm:p-8 flex flex-col">
+        <div class="flex gap-2 mb-4"><span id="pm-cat" class="bdg bdg-b"></span><span class="bdg bdg-g"><i class="fa-solid fa-circle-check text-[9px]"></i>In stock</span></div>
+        <h2 id="pm-title" class="text-2xl font-extrabold text-white leading-tight mb-4"></h2>
+        <div class="p-5 rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-violet-500/5 mb-5">
+          <span class="text-xs text-slate-500">Total price</span>
+          <div id="pm-price" class="text-4xl font-extrabold text-white"></div>
+          <p class="text-[11px] text-slate-500 mt-1 font-mono">Code + schematics + docs + 1 year support</p>
+        </div>
+        <p id="pm-desc" class="text-slate-300 text-sm leading-relaxed whitespace-pre-line bg-slate-900/60 p-4 rounded-xl border border-white/5 max-h-40 overflow-y-auto no-sb mb-5"></p>
+        <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">Buy full version</p>
+        <div class="grid grid-cols-2 gap-3 mb-4">
+          <a id="pm-buy-tg" target="_blank" class="btn btn-tg"><i class="fa-brands fa-telegram"></i> Telegram</a>
+          <a id="pm-buy-em" class="btn btn-em"><i class="fa-solid fa-envelope"></i> Email</a>
+        </div>
+        <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">Request demo <span id="pm-fee"></span></p>
+        <div class="grid grid-cols-2 gap-3">
+          <a id="pm-demo-tg" target="_blank" class="btn btn-g"><i class="fa-brands fa-telegram text-sky-400"></i> Telegram</a>
+          <a id="pm-demo-em" class="btn btn-g"><i class="fa-solid fa-envelope text-rose-400"></i> Email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CUSTOM ORDER MODAL -->
+<div id="m-custom" class="mb" onclick="if(event.target===this)closeM('m-custom')">
+  <div class="w-full max-w-xl glass p-7 sm:p-9 relative max-h-[92vh] overflow-y-auto" style="border-radius:28px">
+    <button onclick="closeM('m-custom')" class="absolute top-4 right-4 w-9 h-9 rounded-full text-slate-500 hover:text-white hover:bg-white/10 transition"><i class="fa-solid fa-xmark"></i></button>
+    <h3 class="text-2xl font-extrabold text-white mb-1">Custom order</h3>
+    <p class="text-slate-400 text-xs mb-6"><i class="fa-regular fa-clock text-sky-400"></i> Tell us what you need. We reply within 24 hours.</p>
+    <div class="grid sm:grid-cols-2 gap-4 mb-4">
+      <div><label class="l">Your name *</label><input id="c-name" class="in" placeholder="Your name"></div>
+      <div><label class="l">Phone / Telegram / Email *</label><input id="c-contact" class="in" placeholder="How can we reach you?"></div>
+      <div><label class="l">Project type</label><select id="c-type" class="in"></select></div>
+      <div><label class="l">Budget (₹)</label><input id="c-budget" type="number" class="in" placeholder="Optional"></div>
+    </div>
+    <div class="mb-4"><label class="l">Your use case, features &amp; design *</label><textarea id="c-desc" class="in" placeholder="What is it for? Which features do you want? Any design or hardware preferences?"></textarea></div>
+    <div class="grid grid-cols-2 gap-3">
+      <button onclick="sendCustom('tg')" class="btn btn-tg"><i class="fa-brands fa-telegram"></i> Send on Telegram</button>
+      <button onclick="sendCustom('em')" class="btn btn-em"><i class="fa-solid fa-envelope"></i> Send by Email</button>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div id="m-login" class="mb" onclick="if(event.target===this)closeM('m-login')">
+  <div class="w-full max-w-md glass p-8 relative" style="border-radius:28px">
+    <button onclick="closeM('m-login')" class="absolute top-4 right-4 w-8 h-8 rounded-full text-slate-500 hover:text-white hover:bg-white/10"><i class="fa-solid fa-xmark"></i></button>
+    <div id="lg-form">
+      <div class="text-center mb-7">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400 text-3xl"><i class="fa-solid fa-user-shield"></i></div>
+        <h3 class="text-2xl font-extrabold text-white">Admin access</h3>
+        <p class="text-slate-500 text-xs mt-1">Enter your admin password</p>
+      </div>
+      <input type="password" id="pin" placeholder="Password" class="in text-center tracking-widest font-mono mb-4" onkeydown="if(event.key==='Enter')login()">
+      <button id="lg-btn" onclick="login()" class="btn btn-p w-full"><i class="fa-solid fa-unlock"></i> Open dashboard</button>
+      <p id="lg-err" class="text-red-400 text-xs text-center mt-3 hidden"></p>
+    </div>
+    <div id="lg-lock" class="hidden text-center">
+      <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center"><i class="fa-solid fa-lock text-3xl text-red-400"></i></div>
+      <h3 class="text-xl font-extrabold text-red-400 mb-1">Locked</h3>
+      <p class="text-slate-400 text-xs mb-5">Too many wrong passwords. Try again in:</p>
+      <div id="lg-time" class="text-4xl font-mono font-extrabold text-red-400 tracking-widest">03:00</div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<main id="v-admin" class="hidden pt-24 pb-24 relative z-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-white/10 pb-6 mb-8">
+      <div><h1 class="text-2xl sm:text-3xl font-extrabold text-white flex items-center gap-3"><i class="fa-solid fa-shield-halved text-sky-400"></i> Admin center</h1><p class="text-slate-500 text-xs mt-2">Changes save to Google Sheets instantly.</p></div>
+      <div class="flex gap-2"><button onclick="go('store')" class="btn btn-g !py-2.5 !text-xs"><i class="fa-solid fa-store"></i> View store</button><button onclick="logout()" class="btn !py-2.5 !text-xs bg-red-500/10 border border-red-500/30 text-red-400"><i class="fa-solid fa-lock"></i> Lock</button></div>
+    </div>
+    <div class="flex gap-2 mb-8 overflow-x-auto no-sb">
+      <button class="tab on" onclick="tab('t-prod',this)"><i class="fa-solid fa-box-open mr-1.5"></i>Products</button>
+      <button class="tab" onclick="tab('t-cat',this)"><i class="fa-solid fa-tags mr-1.5"></i>Categories</button>
+      <button class="tab" onclick="tab('t-set',this)"><i class="fa-solid fa-sliders mr-1.5"></i>Settings</button>
+    </div>
+
+    <div id="t-prod" class="tc">
+      <div class="glass mb-8 overflow-hidden">
+        <div class="px-6 py-5 border-b border-white/10 flex justify-between"><h3 id="f-title" class="font-bold text-white"><i class="fa-solid fa-plus-circle text-sky-400 mr-2"></i>Add new product</h3><button onclick="resetForm()" class="text-xs text-slate-500 hover:text-slate-300"><i class="fa-solid fa-rotate-left"></i> Reset</button></div>
+        <form id="pf" class="p-6 grid md:grid-cols-2 gap-5" onsubmit="saveProduct(event)">
+          <input type="hidden" id="p-id">
+          <div><label class="l">Title *</label><input id="p-title" required class="in" placeholder="ESP32 RFID Attendance System"></div>
+          <div><label class="l">Category *</label><select id="p-cat" class="in"></select></div>
+          <div><label class="l">Price (₹) *</label><input id="p-price" type="number" min="1" required class="in" placeholder="499"></div>
+          <div><label class="l">Image URLs (comma-separated)</label><input id="p-img" class="in" placeholder="https://img1.jpg, https://img2.jpg"></div>
+          <div><label class="l">Video URL (MP4, optional)</label><input id="p-vid" type="url" class="in" placeholder="https://example.com/demo.mp4"></div>
+          <div><label class="l">Feature in hero</label><select id="p-spot" class="in"><option value="false">No</option><option value="true">Yes</option></select></div>
+          <div class="md:col-span-2"><label class="l">Description *</label><textarea id="p-desc" required class="in" placeholder="Full feature breakdown..."></textarea></div>
+          <div class="md:col-span-2 flex justify-end"><button id="p-save" class="btn btn-p"><i class="fa-solid fa-cloud-arrow-up"></i> Save to cloud</button></div>
+        </form>
+      </div>
+      <div class="glass overflow-x-auto"><table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Hero</th><th class="text-right">Actions</th></tr></thead><tbody id="ap-list"></tbody></table></div>
+    </div>
+
+    <div id="t-cat" class="tc hidden grid md:grid-cols-2 gap-6">
+      <div class="glass p-6 space-y-4"><h3 class="font-bold text-white">Add category</h3>
+        <div><label class="l">Name</label><input id="nc-name" class="in" placeholder="AI Models"></div>
+        <div><label class="l">Icon (FontAwesome class)</label><input id="nc-icon" class="in" placeholder="fa-brain"></div>
+        <button onclick="addCat()" class="btn btn-p w-full"><i class="fa-solid fa-plus"></i> Add category</button></div>
+      <div class="glass p-6"><h3 class="font-bold text-white mb-4">Manage categories</h3><ul id="ac-list" class="max-h-80 overflow-y-auto no-sb"></ul></div>
+    </div>
+
+    <div id="t-set" class="tc hidden grid md:grid-cols-2 gap-6">
+      <div class="glass p-6 space-y-4"><h3 class="font-bold text-white"><i class="fa-solid fa-store text-sky-400 mr-2"></i>Store &amp; orders</h3>
+        <div><label class="l">Telegram username (no @)</label><input id="s-tg" class="in" placeholder="TechnoSoftware"></div>
+        <div><label class="l">Customer service email (shown on home page &amp; receives email orders)</label><input id="s-mail" type="email" class="in" placeholder="support@yourdomain.com"></div>
+        <div><label class="l">UPI ID (private)</label><input id="s-upi" class="in" placeholder="yourname@upi"></div>
+        <div><label class="l">Demo fee (₹)</label><input id="s-fee" type="number" class="in" placeholder="50"></div></div>
+      <div class="glass p-6 space-y-4"><h3 class="font-bold text-white"><i class="fa-solid fa-lock text-violet-400 mr-2"></i>Security</h3>
+        <div><label class="l">New admin password</label><input id="s-pw" type="password" class="in" placeholder="Leave blank to keep current"></div>
+        <div><label class="l">Confirm password</label><input id="s-pw2" type="password" class="in"></div>
+        <p class="text-xs text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-xl p-3"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Changing the password signs you out.</p></div>
+      <div class="md:col-span-2 flex justify-end"><button onclick="saveSettings()" class="btn btn-p"><i class="fa-solid fa-cloud-arrow-up"></i> Save settings</button></div>
+    </div>
+  </div>
+</main>
+
+<script>
+// ═══ CONFIG: paste your deployed Apps Script Web App URL ═══
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyK98_PLXa5bEayRO9edRMqjGm6aKTL5AZ-GbQpJqj_O2n3_8u3a8_zhGLDTTX2b827/exec";
+const LOCK_MS = 3 * 60 * 1000;           // 3 minute lock
+const K = { tok:"ts_tok", lock:"ts_lock", cache:"ts_cache" };
+const S = { products:[], categories:[], settings:{}, f:"All", q:"", sort:"new", tok:localStorage.getItem(K.tok) };
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const inr = n => "₹" + (parseFloat(n) || 0).toLocaleString("en-IN");
+const imgs = p => String(p.images || "").split(",").map(s => s.trim()).filter(Boolean);
+const isSpot = p => p.spotlight === true || String(p.spotlight).toLowerCase() === "true";
+
+// text/plain avoids the CORS preflight that Apps Script cannot answer
+async function api(action, data = {}) {
+  try {
+    const r = await fetch(SCRIPT_URL, { method:"POST", headers:{ "Content-Type":"text/plain;charset=utf-8" }, body: JSON.stringify({ action, token:S.tok, ...data }) });
+    return await r.json();
+  } catch (e) { return { success:false, error:"Network error. Check SCRIPT_URL / deployment access." }; }
+}
+
+// ═══ BOOT (no loading screen: cached data paints instantly) ═══
+addEventListener("DOMContentLoaded", async () => {
+  fx();
+  try { const c = JSON.parse(localStorage.getItem(K.cache)); if (c) { Object.assign(S, c); paint(); } else skeleton(); } catch { skeleton(); }
+  if (SCRIPT_URL.startsWith("YOUR_")) { demo(); paint(); return; }
+  const d = await api("getStoreData");
+  if (d.success) { S.products = d.products; S.categories = d.categories; S.settings = d.settings;
+    localStorage.setItem(K.cache, JSON.stringify({ products:S.products, categories:S.categories, settings:S.settings })); paint(); }
+  else if (!S.products.length) { demo(); paint(); }
+});
+function skeleton() { $("grid").innerHTML = '<div class="sk"></div>'.repeat(3); }
+function demo() {
+  S.categories = [{id:"1",name:"Embedded Systems",icon:"fa-microchip"},{id:"2",name:"Robotics",icon:"fa-robot"},{id:"3",name:"IoT Firmware",icon:"fa-wifi"}];
+  S.settings = { telegram:"TechnoSoftware", supportEmail:"support@example.com", demoFee:"50" };
+  S.products = [
+    { id:"d1", title:"ESP32 Automated RFID Attendance System", category:"Embedded Systems", price:499, images:"https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80", video:"", spotlight:false, description:"Complete C++ firmware, circuit diagrams and webhook setup.", createdAt:new Date(Date.now()-36e5).toISOString() },
+    { id:"d2", title:"Obstacle Avoiding Autonomous Robot Firmware", category:"Robotics", price:1299, images:"https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80", video:"", spotlight:true, description:"Dual ultrasonic routing, PID control and manual override.", createdAt:new Date().toISOString() }
+  ];
+}
+function paint() { hero(); cats(); grid(); support(); observe(); }
+
+// ═══ VIEWS ═══
+function go(v) {
+  $("v-store").classList.toggle("hidden", v !== "store");
+  $("v-admin").classList.toggle("hidden", v !== "admin");
+  $("support").classList.toggle("hidden", v !== "store" || !S.settings.supportEmail);
+  scrollTo({ top:0, behavior:"smooth" });
+  if (v === "admin") loadAdmin();
+}
+const openM = id => { $(id).classList.add("open"); document.body.style.overflow = "hidden"; };
+const closeM = id => { $(id).classList.remove("open"); document.body.style.overflow = ""; if (id === "m-prod") $("pm-main").innerHTML = ""; };
+
+// ═══ STOREFRONT ═══
+function hero() {
+  const p = [...S.products].reverse().find(isSpot), el = $("spot");
+  if (!p) { el.classList.add("hidden"); return; }
+  const im = imgs(p)[0] || "";
+  el.classList.remove("hidden");
+  el.innerHTML = `<div class="card overflow-hidden" onclick="openProduct('${esc(p.id)}')">
+    <div class="relative h-72">${p.video ? `<video src="${esc(p.video)}" autoplay loop muted playsinline class="w-full h-full object-cover"></video>` : im ? `<img src="${esc(im)}" class="w-full h-full object-cover">` : ""}
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+      <span class="bdg bdg-b absolute top-4 left-4"><i class="fa-solid fa-star text-[9px]"></i>Spotlight</span>
+      <div class="absolute bottom-0 p-6"><h3 class="text-xl font-extrabold text-white mb-1">${esc(p.title)}</h3><p class="text-sky-400 font-bold">${inr(p.price)}</p></div></div><div class="shine"></div></div>`;
+}
+function cats() {
+  $("cats").innerHTML = [`<button class="pill ${S.f === "All" ? "on" : ""}" onclick="S.f='All';cats();grid()">All</button>`]
+    .concat(S.categories.map(c => `<button class="pill ${S.f === c.name ? "on" : ""}" data-c="${esc(c.name)}" onclick="S.f=this.dataset.c;cats();grid()"><i class="fa-solid ${esc(c.icon || "fa-folder")} mr-1.5 text-[10px]"></i>${esc(c.name)}</button>`)).join("");
+}
+function grid() {
+  let a = S.products.filter(p => (S.f === "All" || p.category === S.f) && (!S.q || (p.title + " " + p.description).toLowerCase().includes(S.q)));
+  if (S.sort === "lh") a.sort((x, y) => x.price - y.price); else if (S.sort === "hl") a.sort((x, y) => y.price - x.price); else a.sort((x, y) => new Date(y.createdAt) - new Date(x.createdAt));
+  if (!a.length) { $("grid").innerHTML = `<div class="col-span-full text-center py-24 text-slate-500 text-sm"><i class="fa-solid fa-ghost text-4xl text-slate-700 mb-4 block"></i>No products found.<br><button onclick="S.f='All';S.q='';$('search').value='';cats();grid()" class="mt-3 text-sky-400 font-semibold">Clear filters</button></div>`; return; }
+  $("grid").innerHTML = a.map(p => { const im = imgs(p)[0];
+    return `<div class="card rv flex flex-col" onclick="openProduct('${esc(p.id)}')"><div class="relative h-52 overflow-hidden rounded-t-[22px] bg-slate-900">
+      ${im ? `<img src="${esc(im)}" loading="lazy" class="w-full h-full object-cover">` : `<div class="h-full flex items-center justify-center"><i class="fa-solid fa-image text-3xl text-slate-700"></i></div>`}
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent opacity-70"></div>
+      ${p.video ? '<span class="bdg bdg-r absolute top-3 left-3 !text-[9px]"><i class="fa-solid fa-play"></i>VIDEO</span>' : ""}
+      <span class="absolute top-3 right-3 bg-slate-950/80 backdrop-blur text-[10px] font-bold px-2.5 py-1 rounded-lg border border-white/10">${esc(p.category)}</span></div>
+      <div class="p-5 flex flex-col flex-grow"><h3 class="text-sm font-bold text-white mb-2 lc">${esc(p.title)}</h3><p class="text-slate-500 text-xs mb-4 flex-grow lc leading-relaxed">${esc(p.description)}</p>
+      <div class="flex items-center justify-between pt-4 border-t border-white/5"><span class="text-xl font-extrabold text-white">${inr(p.price)}</span><span class="bdg bdg-b">View <i class="fa-solid fa-arrow-right text-[9px]"></i></span></div></div><div class="shine"></div></div>`; }).join("");
+  observe(); tilt();
+}
+function support() {
+  const m = S.settings.supportEmail, el = $("support");
+  el.classList.toggle("hidden", !m || !$("v-store") || $("v-store").classList.contains("hidden"));
+  if (m) { $("sup-mail").textContent = m; $("sup-link").href = "mailto:" + m; }
+}
+
+// ═══ PRODUCT MODAL + ORDER LINKS ═══
+const tgUser = () => S.settings.telegram || "TechnoSoftware";
+const tgLink = msg => `https://t.me/${encodeURIComponent(tgUser())}?text=${encodeURIComponent(msg)}`;
+const mailLink = (sub, msg) => `mailto:${S.settings.supportEmail || ""}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(msg)}`;
+const mobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+const copyTxt = t => { try { navigator.clipboard.writeText(t); } catch (e) {} };
+function orderText(p, demo, ch) {
+  const ref = `TS-${demo ? "DEMO" : "BUY"}-${String(p.id).slice(-4).toUpperCase()}`, fee = inr(S.settings.demoFee || 50);
+  if (ch === "tg") return demo
+    ? `👋 Hello Techno Software!\n\nI would like to see a live demo of this product:\n\n📦 Product: ${p.title}\n🏷️ Category: ${p.category}\n💵 Demo fee: ${fee}\n🔖 Reference: ${ref}\n\n✅ Please send me the payment details and tell me when the demo can start.\n\nThank you! 🙏`
+    : `👋 Hello Techno Software!\n\nI would like to buy this product:\n\n📦 Product: ${p.title}\n🏷️ Category: ${p.category}\n💰 Price: ${inr(p.price)}\n🔖 Reference: ${ref}\n\n✅ Please send me the payment details (UPI) and the delivery steps.\n\nThank you! 🙏`;
+  return demo
+    ? `Hello Techno Software team,\n\nI would like to request a live demo of the product below.\n\nProduct: ${p.title}\nCategory: ${p.category}\nDemo fee: ${fee}\nReference: ${ref}\n\nPlease reply with the payment details and the available demo time.\n\nMy name: \nMy phone / Telegram: \n\nThank you,`
+    : `Hello Techno Software team,\n\nI would like to purchase the product below.\n\nProduct: ${p.title}\nCategory: ${p.category}\nPrice: ${inr(p.price)}\nReference: ${ref}\n\nPlease reply with the payment details and the delivery process.\n\nMy name: \nMy phone / Telegram: \n\nThank you,`;
+}
+// Telegram: copy text too, because some Telegram Desktop/Web versions drop the pre-filled text
+function tgGo(msg) { copyTxt(msg); toast("Message copied. If Telegram opens empty, just paste it.", "info"); }
+// Email: phones use the mail app (mailto); computers open Gmail compose, since many have no mail app
+function mailGo(ev, sub, msg) {
+  copyTxt(msg); const m = S.settings.supportEmail;
+  if (!m) { if (ev) ev.preventDefault(); return toast("Email is not set up yet. Please use Telegram.", "error"); }
+  if (!mobile) { if (ev) ev.preventDefault(); window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(m)}&su=${encodeURIComponent(sub)}&body=${encodeURIComponent(msg)}`, "_blank"); }
+  else if (!ev) location.href = mailLink(sub, msg);
+}
+function openProduct(id) {
+  const p = S.products.find(x => x.id == id); if (!p) return;
+  $("pm-title").textContent = p.title; $("pm-cat").textContent = p.category; $("pm-price").textContent = inr(p.price); $("pm-desc").textContent = p.description;
+  $("pm-fee").textContent = `(${inr(S.settings.demoFee || 50)})`;
+  const T = { buyTg:orderText(p,false,"tg"), demoTg:orderText(p,true,"tg"), buyEm:orderText(p,false,"em"), demoEm:orderText(p,true,"em") };
+  const sB = "Purchase request: " + p.title, sD = "Live demo request: " + p.title;
+  $("pm-buy-tg").href = tgLink(T.buyTg);   $("pm-buy-tg").onclick  = () => tgGo(T.buyTg);
+  $("pm-demo-tg").href = tgLink(T.demoTg); $("pm-demo-tg").onclick = () => tgGo(T.demoTg);
+  $("pm-buy-em").href = mailLink(sB, T.buyEm);   $("pm-buy-em").onclick  = ev => mailGo(ev, sB, T.buyEm);
+  $("pm-demo-em").href = mailLink(sD, T.demoEm); $("pm-demo-em").onclick = ev => mailGo(ev, sD, T.demoEm);
+  const th = $("pm-th"), im = imgs(p); th.innerHTML = "";
+  const show = (t, u) => { $("pm-main").innerHTML = t === "v" ? `<video src="${esc(u)}" controls autoplay class="w-full h-full object-contain bg-black"></video>` : `<img src="${esc(u)}" class="w-full h-full object-contain">`; };
+  const mark = el => { th.querySelectorAll("[data-t]").forEach(x => x.style.borderColor = "transparent"); el.style.borderColor = "#0ea5e9"; };
+  const add = (html, t, u) => { const d = document.createElement("div"); d.dataset.t = 1; d.style.cssText = "width:60px;height:60px;flex-shrink:0;border-radius:10px;border:2px solid transparent;cursor:pointer;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#0f172a"; d.innerHTML = html; d.onclick = () => { show(t, u); mark(d); }; th.appendChild(d); return d; };
+  let first;
+  if (p.video) first = add('<i class="fa-solid fa-play text-red-400"></i>', "v", p.video);
+  im.forEach(u => { const d = add(`<img src="${esc(u)}" class="w-full h-full object-cover">`, "i", u); first = first || d; });
+  if (first) first.click(); else $("pm-main").innerHTML = '<i class="fa-solid fa-image text-4xl text-slate-700"></i>';
+  openM("m-prod");
+}
+
+// ═══ CUSTOM ORDER ═══
+function openCustom() {
+  $("c-type").innerHTML = S.categories.map(c => `<option>${esc(c.name)}</option>`).join("") + "<option>Other</option>";
+  openM("m-custom");
+}
+function sendCustom(via) {
+  const n = $("c-name").value.trim(), c = $("c-contact").value.trim(), d = $("c-desc").value.trim();
+  if (!n || !c || !d) return toast("Please fill your name, contact and description.", "error");
+  const t = $("c-type").value, b = $("c-budget").value ? inr($("c-budget").value) : "Not decided";
+  if (via === "tg") {
+    const msg = `👋 Hello Techno Software!\n\n🛠️ CUSTOM ORDER REQUEST\n\n👤 Name: ${n}\n📱 Contact: ${c}\n🗂️ Project type: ${t}\n💰 Budget: ${b}\n\n📝 What I need (use case, features & design):\n${d}\n\n⏰ I understand you will reply within 24 hours.\nThank you! 🙏`;
+    window.open(tgLink(msg), "_blank"); tgGo(msg);
+  } else {
+    const msg = `Hello Techno Software team,\n\nI would like to place a custom order. Here are my details.\n\nName: ${n}\nContact: ${c}\nProject type: ${t}\nBudget: ${b}\n\nUse case, features and design:\n${d}\n\nPlease reply within 24 hours so we can discuss the details.\n\nThank you,\n${n}`;
+    mailGo(null, "Custom order request from " + n, msg);
+  }
+}
+
+// ═══ AUTH (3 minute lock) ═══
+async function adminEntry() {
+  if (S.tok) { const v = await api("validateSession"); if (v.valid) return go("admin"); S.tok = null; localStorage.removeItem(K.tok); }
+  $("pin").value = ""; $("lg-err").classList.add("hidden"); lockView(); openM("m-login"); setTimeout(() => $("pin").focus(), 250);
+}
+let lt;
+function lockView() {
+  const until = +localStorage.getItem(K.lock) || 0, on = until > Date.now();
+  $("lg-form").classList.toggle("hidden", on); $("lg-lock").classList.toggle("hidden", !on);
+  clearInterval(lt);
+  if (on) lt = setInterval(() => { const r = until - Date.now(); if (r <= 0) { clearInterval(lt); localStorage.removeItem(K.lock); lockView(); } else $("lg-time").textContent = String(Math.floor(r / 6e4)).padStart(2, "0") + ":" + String(Math.floor(r % 6e4 / 1e3)).padStart(2, "0"); }, 250);
+}
+async function login() {
+  const pw = $("pin").value; if (!pw) return;
+  const b = $("lg-btn"); b.disabled = true; b.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Verifying...';
+  const r = await api("login", { password:pw });
+  b.disabled = false; b.innerHTML = '<i class="fa-solid fa-unlock"></i> Open dashboard';
+  if (r.success) { S.tok = r.token; localStorage.setItem(K.tok, r.token); closeM("m-login"); toast("Welcome back!", "success"); go("admin"); }
+  else if (r.locked) { localStorage.setItem(K.lock, r.lockoutUntil); lockView(); }
+  else { const e = $("lg-err"); e.textContent = r.error || "Wrong password."; e.classList.remove("hidden"); $("pin").value = ""; $("pin").focus(); }
+}
+function logout() { api("logout"); S.tok = null; localStorage.removeItem(K.tok); toast("Dashboard locked.", "info"); go("store"); }
+
+// ═══ ADMIN ═══
+function tab(id, btn) { document.querySelectorAll(".tc").forEach(e => e.classList.add("hidden")); $(id).classList.remove("hidden"); document.querySelectorAll(".tab").forEach(e => e.classList.remove("on")); btn.classList.add("on"); }
+async function loadAdmin() {
+  const d = await api("getStoreData");
+  if (!d.success) { toast(d.error || "Failed to load", "error"); return; }
+  S.products = d.products; S.categories = d.categories; S.settings = d.settings;
+  $("p-cat").innerHTML = S.categories.map(c => `<option>${esc(c.name)}</option>`).join("");
+  $("ap-list").innerHTML = S.products.map(p => `<tr><td><div class="flex items-center gap-3">${imgs(p)[0] ? `<img src="${esc(imgs(p)[0])}" class="w-10 h-10 rounded-lg object-cover">` : ""}<b class="text-white text-xs">${esc(p.title)}</b></div></td><td><span class="bdg bdg-b">${esc(p.category)}</span></td><td class="font-mono font-bold text-sky-400">${inr(p.price)}</td><td>${isSpot(p) ? '<span class="bdg bdg-g">Yes</span>' : "—"}</td><td class="text-right whitespace-nowrap"><button onclick="editP('${esc(p.id)}')" class="text-sky-400 w-8 h-8 rounded-lg hover:bg-sky-500/10"><i class="fa-solid fa-pen-to-square"></i></button><button onclick="delP('${esc(p.id)}')" class="text-red-400 w-8 h-8 rounded-lg hover:bg-red-500/10"><i class="fa-solid fa-trash"></i></button></td></tr>`).join("") || '<tr><td colspan="5" class="text-center text-slate-600 py-8">No products yet.</td></tr>';
+  $("ac-list").innerHTML = S.categories.map(c => `<li class="py-3 flex justify-between items-center border-b border-white/5"><span class="text-sm"><i class="fa-solid ${esc(c.icon || "fa-folder")} text-sky-400 mr-3"></i>${esc(c.name)}</span><button onclick="delCat('${esc(c.id)}')" class="text-red-400 w-8 h-8 rounded-lg hover:bg-red-500/10"><i class="fa-solid fa-xmark"></i></button></li>`).join("");
+  $("s-tg").value = S.settings.telegram || ""; $("s-mail").value = S.settings.supportEmail || ""; $("s-upi").value = S.settings.upi || ""; $("s-fee").value = S.settings.demoFee || "";
+}
+async function saveProduct(e) {
+  e.preventDefault(); const id = $("p-id").value, b = $("p-save"); b.disabled = true;
+  const data = { title:$("p-title").value, category:$("p-cat").value, price:$("p-price").value, images:$("p-img").value, video:$("p-vid").value, description:$("p-desc").value, spotlight:$("p-spot").value };
+  const r = await api(id ? "updateProduct" : "addProduct", id ? { id, ...data } : data); b.disabled = false;
+  if (r.success) { toast(r.message, "success"); resetForm(); loadAdmin(); } else toast(r.error, "error");
+}
+function editP(id) { const p = S.products.find(x => x.id == id); if (!p) return;
+  $("f-title").innerHTML = '<i class="fa-solid fa-pen-to-square text-sky-400 mr-2"></i>Edit product';
+  $("p-id").value = p.id; $("p-title").value = p.title; $("p-cat").value = p.category; $("p-price").value = p.price; $("p-img").value = p.images; $("p-vid").value = p.video || ""; $("p-desc").value = p.description; $("p-spot").value = isSpot(p) ? "true" : "false"; scrollTo({ top:0, behavior:"smooth" }); }
+function resetForm() { $("pf").reset(); $("p-id").value = ""; $("f-title").innerHTML = '<i class="fa-solid fa-plus-circle text-sky-400 mr-2"></i>Add new product'; }
+async function delP(id) { if (!confirm("Delete this product?")) return; const r = await api("deleteProduct", { id }); r.success ? (toast("Deleted.", "info"), loadAdmin()) : toast(r.error, "error"); }
+async function addCat() { const name = $("nc-name").value.trim(); if (!name) return;
+  const r = await api("addCategory", { name, icon:$("nc-icon").value.trim() || "fa-folder" }); if (r.success) { $("nc-name").value = $("nc-icon").value = ""; toast(r.message, "success"); loadAdmin(); } else toast(r.error, "error"); }
+async function delCat(id) { if (!confirm("Delete this category?")) return; const r = await api("deleteCategory", { id }); r.success ? (toast("Deleted.", "info"), loadAdmin()) : toast(r.error, "error"); }
+async function saveSettings() {
+  const pw = $("s-pw").value; if (pw && pw !== $("s-pw2").value) return toast("Passwords do not match.", "error");
+  if (pw && pw.length < 8) return toast("Use at least 8 characters.", "error");
+  const data = { telegram:$("s-tg").value.trim().replace(/^@/, ""), supportEmail:$("s-mail").value.trim(), upi:$("s-upi").value.trim(), demoFee:$("s-fee").value.trim() };
+  if (pw) data.newPassword = pw;
+  const r = await api("saveSettings", data);
+  if (r.success) { toast("Settings saved.", "success"); if (pw) { toast("Password changed. Log in again.", "info"); logout(); } else loadAdmin(); } else toast(r.error, "error");
+}
+
+// ═══ TOAST ═══
+function toast(m, t = "success") {
+  const c = { success:["emerald","fa-circle-check"], error:["red","fa-circle-xmark"], info:["sky","fa-circle-info"] }[t] || ["sky", "fa-circle-info"];
+  const d = document.createElement("div"); d.className = `toast flex items-center gap-3 bg-${c[0]}-500/15 border border-${c[0]}-500/30 px-5 py-3.5 rounded-2xl backdrop-blur-xl max-w-sm shadow-2xl`;
+  d.innerHTML = `<i class="fa-solid ${c[1]} text-${c[0]}-400"></i><span class="text-white text-xs font-semibold">${esc(m)}</span>`;
+  $("toasts").appendChild(d); setTimeout(() => d.remove(), 4000);
+}
+
+// ═══ PREMIUM FX: scroll reveal, 3D tilt, cursor glow, particles ═══
+let io;
+function observe() { io = io || new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const t = e.target; t.classList.add("in-v"); io.unobserve(t); if (t.classList.contains("card")) setTimeout(() => { t.classList.remove("rv", "in-v"); t.style.transitionDelay = ""; }, 1300); } }), { threshold:.12 });
+  document.querySelectorAll(".rv:not(.in-v)").forEach((el, i) => { el.style.transitionDelay = (i % 3) * 90 + "ms"; io.observe(el); }); }
+function tilt() {
+  document.querySelectorAll(".card").forEach(c => { if (c._t) return; c._t = 1;
+    c.addEventListener("mousemove", e => { const r = c.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+      c.style.setProperty("--mx", x + "px"); c.style.setProperty("--my", y + "px");
+      c.style.transform = `perspective(900px) rotateX(${((y / r.height) - .5) * -7}deg) rotateY(${((x / r.width) - .5) * 7}deg) translateY(-8px)`; });
+    c.addEventListener("mouseleave", () => c.style.transform = ""); });
+}
+function fx() {
+  const g = $("glow"); addEventListener("mousemove", e => { g.style.left = e.clientX + "px"; g.style.top = e.clientY + "px"; });
+  addEventListener("keydown", e => { if ((e.metaKey || e.ctrlKey) && e.key === "k") { e.preventDefault(); $("search").focus(); } if (e.key === "Escape") ["m-prod","m-custom","m-login"].forEach(closeM); });
+  const cv = $("cv"), x = cv.getContext("2d"); let W, H, m = { x:-999, y:-999 };
+  const rs = () => { W = cv.width = innerWidth; H = cv.height = innerHeight; }; rs(); addEventListener("resize", rs); addEventListener("mousemove", e => { m.x = e.clientX; m.y = e.clientY; });
+  const P = Array.from({ length: innerWidth < 700 ? 28 : 60 }, () => ({ x:Math.random() * W, y:Math.random() * H, vx:(Math.random() - .5) * .4, vy:-Math.random() * .6 - .1, r:Math.random() * 2 + .6, c:["#0ea5e9","#a855f7","#38bdf8"][Math.random() * 3 | 0], p:Math.random() * 6 }));
+  (function loop() { x.clearRect(0, 0, W, H);
+    P.forEach(p => { p.p += .03; p.x += p.vx; p.y += p.vy; const dx = p.x - m.x, dy = p.y - m.y, d = Math.hypot(dx, dy);
+      if (d < 170) { const f = (170 - d) / 170; p.x += dx / d * f * 4; p.y += dy / d * f * 4; }
+      if (p.y < -10 || p.x < -10 || p.x > W + 10) { p.y = H + 10; p.x = Math.random() * W; }
+      x.globalAlpha = .35 + Math.sin(p.p) * .15; x.fillStyle = p.c; x.shadowBlur = 14; x.shadowColor = p.c; x.beginPath(); x.arc(p.x, p.y, p.r, 0, 6.283); x.fill(); });
+    x.shadowBlur = 0; for (let i = 0; i < P.length; i++) for (let j = i + 1; j < P.length; j++) { const d = Math.hypot(P[i].x - P[j].x, P[i].y - P[j].y); if (d < 120) { x.globalAlpha = (1 - d / 120) * .12; x.strokeStyle = "#0ea5e9"; x.beginPath(); x.moveTo(P[i].x, P[i].y); x.lineTo(P[j].x, P[j].y); x.stroke(); } }
+    requestAnimationFrame(loop); })();
+}
+</script>
+</body>
+</html>
